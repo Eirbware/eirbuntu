@@ -1,0 +1,16 @@
+autoinstall:
+  version: 1
+  name: "Eirbuntu"
+  
+  interactive-sections:
+    - storage
+    - networks
+    - locale
+    - keyboard
+    - identity
+  
+  packages:
+    - git
+    - vim 
+    - emacs
+    - codium

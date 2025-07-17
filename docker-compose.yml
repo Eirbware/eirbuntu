@@ -1,0 +1,21 @@
+services:
+  main: 
+    image: ubuntu:noble
+    command: bash /app/iso-modifier.sh
+    working_dir: /app
+    privileged: true # Un peu sus mais tkt
+    cap_add: 
+      - MKNOD # Encore plus sus ouais (pour pouvoir unsquash)
+    volumes: 
+      - type: bind
+        source: ./iso
+        target: /app/iso
+      - type: bind
+        source: ./iso-modifier.sh
+        target: /app/iso-modifier.sh
+      - type: bind
+        source: ./autoinstall.yaml
+        target: /app/autoinstall.yaml
+      - type: bind
+        source: ./new-iso
+        target: /app/new-iso
