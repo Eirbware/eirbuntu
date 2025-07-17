@@ -13,4 +13,3 @@ autoinstall:
     - git
     - vim 
     - emacs
-    - codium
