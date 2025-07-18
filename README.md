@@ -9,5 +9,5 @@ Afterwards, run:
 docker compose up; docker compose down
 ```
 
-This will create and run a docker responsible which will create a eirbuntu iso.
+This will create and run a docker which will create a eirbuntu iso.
 When finished, the iso will be in the `new-iso` folder.
