@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Open Eirb website
-Exec=firefox hhtps://eirb.fr
+Exec=firefox https://eirb.fr
