@@ -17,5 +17,14 @@ services:
         source: ./autoinstall.yaml
         target: /app/autoinstall.yaml
       - type: bind
+        source: ./commands-before-install.sh
+        target: /app/commands-before-install.sh
+      - type: bind
+        source: ./assets
+        target: /app/assets
+      - type: bind
+        source: ./desktop-files
+        target: /app/desktop-files
+      - type: bind
         source: ./new-iso
         target: /app/new-iso

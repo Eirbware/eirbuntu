@@ -13,3 +13,6 @@ autoinstall:
     - git
     - vim 
     - emacs
+
+  early-commands:
+    - ./cdrom/commands-before-install.sh
