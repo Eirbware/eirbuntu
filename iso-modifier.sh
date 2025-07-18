@@ -20,6 +20,10 @@ xorriso -osirrox on -indev $ISO -extract / $TMP_DIR &> /dev/null
 ### Copying autoinstall yaml
 cp autoinstall.yaml $TMP_DIR
 
+### Changing the name in grub
+sed -i -e 's/Ubuntu/Eirbuntu/g' $TMP_DIR/boot/grub/loopback.cfg
+sed -i -e 's/Ubuntu/Eirbuntu/g' $TMP_DIR/boot/grub/grub.cfg
+
 ### Copying MBR partition (necessary to boot from usb)
 MBR_FILE=/mbr_copy.bin
 dd if=$ISO bs=1 count=432 of=$MBR_FILE
