@@ -19,7 +19,7 @@ xorriso -osirrox on -indev $ISO -extract / $TMP_DIR &> /dev/null
 
 ### Copying autoinstall and commands-before-installation and assets
 cp autoinstall.yaml $TMP_DIR
-cp commands-before-installation.sh $TMP_DIR
+cp commands-before-install.sh $TMP_DIR
 cp assets $TMP_DIR -r
 cp desktop-files $TMP_DIR -r
 
