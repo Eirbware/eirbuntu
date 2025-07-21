@@ -8,6 +8,7 @@ cp /cdrom/assets/ubuntu-logo.png /usr/share/plymouth/ubuntu-logo.png
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 gsettings set org.gnome.desktop.background picture-uri-dark file:///usr/share/backgrounds/eirbuntu-background.png
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/eirbuntu-background.png
+gsettings set org.gnome.desktop.interface gtk-theme eirbuntu
 
 ### Adding desktop files
 cp /cdrom/desktop_files/* ~/Desktop
