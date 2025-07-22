@@ -1,6 +1,6 @@
 #!/bin/bash
 VERSION=minimal.fr
-PREINSTALLED_PACKAGES="dbus-x11 git vim neovim emacs valgrind gdb wireshark sl gcc"
+PREINSTALLED_PACKAGES="dbus-x11"
 set -x
 #set -e
 
