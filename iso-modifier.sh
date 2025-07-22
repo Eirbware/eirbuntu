@@ -7,7 +7,7 @@ set -x
 
 ### Update and install necesary packages
 apt-get update
-apt-get install -y xorriso 
+apt-get install -y xorriso dpkg-repack dbus-x11
 
 ### Creating tmp dir to work in
 TMP_DIR=/iso-modif
@@ -22,6 +22,11 @@ cp autoinstall.yaml $TMP_DIR
 cp commands-before-install.sh $TMP_DIR
 cp assets $TMP_DIR -r
 cp desktop-files $TMP_DIR -r
+
+### Copying dbus-x11 in the iso (necessary to make gnome modification work)
+dpkg-repack dbus-x11
+mkdir $TMP_DIR/preinstalled-packages
+cp *.deb $TMP_DIR/preinstalled-packages
 
 ### Changing the name in grub
 sed -i -e 's/Ubuntu/Eirbuntu/g' $TMP_DIR/boot/grub/loopback.cfg

@@ -15,4 +15,4 @@ autoinstall:
     - emacs
 
   early-commands:
-    - ./cdrom/commands-before-install.sh
+    - /cdrom/commands-before-install.sh 2> /error.log
