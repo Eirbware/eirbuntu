@@ -1,5 +1,6 @@
 #!/bin/bash
 VERSION=minimal.fr
+PREINSTALLED_PACKAGES="dbus-x11 git vim neovim emacs valgrind gdb wireshark sl gcc"
 set -x
 #set -e
 
@@ -7,7 +8,7 @@ set -x
 
 ### Update and install necesary packages
 apt-get update
-apt-get install -y xorriso dpkg-repack dbus-x11
+apt-get install -y xorriso dpkg-repack $PREINSTALLED_PACKAGES
 
 ### Creating tmp dir to work in
 TMP_DIR=/iso-modif
@@ -24,7 +25,7 @@ cp assets $TMP_DIR -r
 cp desktop-files $TMP_DIR -r
 
 ### Copying dbus-x11 in the iso (necessary to make gnome modification work)
-dpkg-repack dbus-x11
+dpkg-repack $PREINSTALLED_PACKAGES
 mkdir $TMP_DIR/preinstalled-packages
 cp *.deb $TMP_DIR/preinstalled-packages
 

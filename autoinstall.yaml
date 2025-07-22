@@ -13,6 +13,12 @@ autoinstall:
     - git
     - vim 
     - emacs
+    - neovim
+    - valgrind
+    - gdb
+
+  late-commands:
+    - snap install codium --classic
 
   early-commands:
     - /cdrom/commands-before-install.sh 2> /error.log
