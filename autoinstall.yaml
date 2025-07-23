@@ -22,9 +22,9 @@ autoinstall:
     - gcc
 
   late-commands:
-    - cp /cdrom/commands-at-install.sh /target
-    - curtin in-target -- /bin/bash /commands-at-install.sh 2>> /error.log
-    - curtin in-target -- rm /commands-at-install.sh
+    - ln -s /cdrom /target/cdrom
+    - curtin in-target -- /bin/bash /cdrom/commands-at-install.sh 2>> /error.log
+    - rm /target/cdrom
 
   early-commands:
     - /cdrom/commands-at-install.sh 2>> /error.log
