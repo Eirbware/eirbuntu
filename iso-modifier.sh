@@ -18,9 +18,9 @@ mkdir -p $TMP_DIR
 ISO=iso/$(ls iso | head -n 1)
 xorriso -osirrox on -indev $ISO -extract / $TMP_DIR &> /dev/null
 
-### Copying autoinstall and commands-before-installation and assets
+### Copying autoinstall and commands-at-install and assets
 cp autoinstall.yaml $TMP_DIR
-cp commands-before-install.sh $TMP_DIR
+cp commands-at-install.sh $TMP_DIR
 cp assets $TMP_DIR -r
 cp desktop-files $TMP_DIR -r
 

@@ -19,9 +19,12 @@ autoinstall:
     - gdb
     - wireshark
     - sl
+    - gcc
 
   late-commands:
-    - snap install codium --classic
+    - cp /cdrom/commands-at-install.sh /target
+    - curtin in-target -- /bin/bash /commands-at-install.sh 2>> /error.log
+    - curtin in-target -- rm /commands-at-install.sh
 
   early-commands:
-    - /cdrom/commands-before-install.sh 2> /error.log
+    - /cdrom/commands-at-install.sh 2>> /error.log

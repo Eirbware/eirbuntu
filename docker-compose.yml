@@ -4,8 +4,6 @@ services:
     command: bash /app/iso-modifier.sh
     working_dir: /app
     privileged: true # Un peu sus mais tkt
-    cap_add: 
-      - MKNOD # Encore plus sus ouais (pour pouvoir unsquash)
     volumes: 
       - type: bind
         source: ./iso
@@ -17,8 +15,8 @@ services:
         source: ./autoinstall.yaml
         target: /app/autoinstall.yaml
       - type: bind
-        source: ./commands-before-install.sh
-        target: /app/commands-before-install.sh
+        source: ./commands-at-install.sh
+        target: /app/commands-at-install.sh
       - type: bind
         source: ./assets
         target: /app/assets
