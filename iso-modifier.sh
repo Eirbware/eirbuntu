@@ -2,13 +2,16 @@
 VERSION=minimal.fr
 PREINSTALLED_PACKAGES="dbus-x11"
 set -x
-#set -e
+set -e
 
 # Uses ubuntu autoinstall
 
 ### Update and install necesary packages
 apt-get update
 apt-get install -y xorriso dpkg-repack $PREINSTALLED_PACKAGES
+
+### Set scripts and eirb.fr shortcut as executable
+chmod +x scripts/* desktop-files/eirb.fr.desktop
 
 ### Creating tmp dir to work in
 TMP_DIR=/iso-modif
@@ -20,9 +23,10 @@ xorriso -osirrox on -indev $ISO -extract / $TMP_DIR &> /dev/null
 
 ### Copying autoinstall and commands-at-install and assets
 cp autoinstall.yaml $TMP_DIR
-cp commands-at-install.sh $TMP_DIR
+cp scripts $TMP_DIR -r
 cp assets $TMP_DIR -r
 cp desktop-files $TMP_DIR -r
+cp gnome-files $TMP_DIR -r
 
 ### Copying dbus-x11 in the iso (necessary to make gnome modification work)
 dpkg-repack $PREINSTALLED_PACKAGES

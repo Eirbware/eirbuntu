@@ -1,6 +1,7 @@
 autoinstall:
   version: 1
   name: "Eirbuntu"
+  timezone: "Europe/Paris"
   
   interactive-sections:
     - storage
@@ -10,21 +11,20 @@ autoinstall:
     - identity
   
   packages:
-    - git
     - vim 
     - neovim
     - emacs
+    - git
     - neovim
     - valgrind
     - gdb
     - wireshark
     - sl
     - gcc
+    - tmux 
 
   late-commands:
-    - ln -s /cdrom /target/cdrom
-    - curtin in-target -- /bin/bash /cdrom/commands-at-install.sh 2>> /error.log
-    - rm /target/cdrom
+    - curtin in-target -- /bin/bash /cdrom/scripts/commands-after-install.sh 2>> /error.log
 
   early-commands:
-    - /cdrom/commands-at-install.sh 2>> /error.log
+    - /cdrom/scripts/commands-before-install.sh 2>> /error.log

@@ -7,9 +7,6 @@ USER=$(id -nu $ID)
 ### Unpack and install preinstalled packages
 dpkg -i /cdrom/preinstalled-packages/*.deb
 
-### Install snap packages
-snap install codium --classic
-
 ### Adding eirbuntu theme and background
 cp /cdrom/assets/eirbuntu-theme /usr/share/plymouth/themes/eirbuntu -r
 cp /cdrom/assets/eirbuntu-background.png /usr/share/backgrounds
