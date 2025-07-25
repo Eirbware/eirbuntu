@@ -19,6 +19,9 @@ dconf update
 mkdir /etc/skel/Desktop
 cp /cdrom/desktop-files/* /etc/skel/Desktop -r
 
+### Install codium
+snap install codium --classic
+
 ### Changing default plymouth theme to eirbuntu to change the boot image
 ln -sf /usr/share/plymouth/themes/eirbuntu/eirbuntu.plymouth /etc/alternatives/default.plymouth
 update-initramfs -u
