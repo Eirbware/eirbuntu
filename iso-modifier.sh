@@ -1,7 +1,7 @@
 #!/bin/bash
 VERSION=minimal.fr
-PREINSTALLED_PACKAGES="dbus-x11"
-PACKAGES_TO_INSTALL="vim"
+PREINSTALLED_PACKAGES="dbus-x11" # Necessary for installation (separated to avoid being deleted by mistake)
+PACKAGES_TO_INSTALL="vim neovim emacs git valgrind gdb wireshark sl gcc tmux feh clang-format clang-tidy make nodejs npm"
 set -x
 set -e
 
@@ -34,24 +34,24 @@ dpkg-repack $PREINSTALLED_PACKAGES
 mkdir $TMP_DIR/preinstalled-packages
 cp *.deb $TMP_DIR/preinstalled-packages
 
-### Put packages to install in /pool to be able to be installed offline
-mkdir $TMP_DIR/pool/extras
-cd $TMP_DIR/pool/extras
+### Put packages to install in /packages-to-install to be able to be installed offline
+mkdir $TMP_DIR/packages-to-install
+cd $TMP_DIR/packages-to-install
 for package in $PACKAGES_TO_INSTALL
 do
-  dpkg-repack $(apt-cache depends --false-suggests $package |awk '{print $2}') $package
+  dpkg-repack $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances $package | grep "^\w") $package
 done
 cd /app
 
 ### Updates the package list
-mkdir -p $TMP_DIR/dists/noble/extras/binary-amd64
-dpkg-scanpackages $TMP_DIR/pool/extras /dev/null | gzip -9c > $TMP_DIR/dists/noble/extras/binary-amd64/Packages.gz
+#mkdir -p $TMP_DIR/dists/noble/extras/binary-amd64
+#dpkg-scanpackages $TMP_DIR/pool/extras /dev/null | gzip -9c > $TMP_DIR/dists/noble/extras/binary-amd64/Packages.gz
 
-sed -i -e 's/^Components\([a-z: ]*\)$/Components\1 extras/' $TMP_DIR/dists/noble/Release
-cd $TMP_DIR/dists/noble
-filename="extras/binary-amd64/Packages.gz"
-echo " $(sha256sum $filename | awk '{print $1}') $(stat -c%s $filename) $filename" >> Release
-cd /app
+#sed -i -e 's/^Components\([a-z: ]*\)$/Components\1 extras/' $TMP_DIR/dists/noble/Release
+#cd $TMP_DIR/dists/noble
+#filename="extras/binary-amd64/Packages.gz"
+#echo " $(sha256sum $filename | awk '{print $1}') $(stat -c%s $filename) $filename" >> Release
+#cd /app
 
 ### Changing the name in grub
 sed -i -e 's/Ubuntu/Eirbuntu/g' $TMP_DIR/boot/grub/loopback.cfg

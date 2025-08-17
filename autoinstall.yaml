@@ -10,23 +10,23 @@ autoinstall:
     - keyboard
     - identity
   
-  packages:
-    - vim 
-    - neovim
-    - emacs
-    - git
-    - valgrind
-    - gdb
-    - wireshark
-    - sl
-    - gcc
-    - tmux 
-    - feh
-    - clang-format
-    - clang-tidy
-    - make
-    - nodejs
-    - npm
+#  packages:
+#    - vim 
+#    - neovim
+#    - emacs
+#    - git
+#    - valgrind
+#    - gdb
+#    - wireshark
+#    - sl
+#    - gcc
+#    - tmux 
+#    - feh
+#    - clang-format
+#    - clang-tidy
+#    - make
+#    - nodejs
+#    - npm
 
   late-commands:
     - curtin in-target -- /bin/bash /cdrom/scripts/commands-after-install.sh 2>> /error.log

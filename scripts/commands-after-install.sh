@@ -2,7 +2,8 @@
 # Ran after install
 
 ### Unpack and install preinstalled packages
-dpkg -i /cdrom/preinstalled-packages/*.deb
+dpkg -i -R -G /cdrom/preinstalled-packages
+dpkg -i -R -G /cdrom/packages-to-install
 
 ### Adding eirbuntu theme and background files
 cp /cdrom/assets/eirbuntu-theme /usr/share/plymouth/themes/eirbuntu -r
