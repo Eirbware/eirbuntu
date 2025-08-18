@@ -2,6 +2,7 @@
 VERSION=minimal.fr
 PREINSTALLED_PACKAGES="dbus-x11" # Necessary for installation (separated to avoid being deleted by mistake)
 PACKAGES_TO_INSTALL="vim neovim emacs git valgrind gdb wireshark sl gcc tmux feh clang-format clang-tidy make nodejs npm"
+# Codium is also installed, but not directly from apt, thus not in the list above
 set -x
 set -e
 
@@ -9,7 +10,16 @@ set -e
 
 ### Update and install necesary packages
 apt-get update
-apt-get install -y xorriso dpkg-repack dpkg-dev $PREINSTALLED_PACKAGES $PACKAGES_TO_INSTALL
+apt-get install -y xorriso dpkg-repack dpkg-dev gpg wget $PREINSTALLED_PACKAGES $PACKAGES_TO_INSTALL
+
+### Install codium (https://vscodium.com/#install)
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+| tee /etc/apt/sources.list.d/vscodium.sources
+apt-get update && apt-get install -y codium
 
 ### Set scripts and eirb.fr shortcut as executable
 chmod +x scripts/* desktop-files/eirb.fr.desktop
@@ -41,6 +51,9 @@ for package in $PACKAGES_TO_INSTALL
 do
   dpkg-repack $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances $package | grep "^\w") $package
 done
+# Also for codium
+apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances codium
+dpkg-repack $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances codium | grep "^\w") codium
 cd /app
 
 ### Updates the package list
