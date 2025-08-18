@@ -1,0 +1,10 @@
+[Unit]
+Description=Changes the name of the os in grub
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStop=/opt/change-os-name.sh
+
+[Install]
+WantedBy=multi-user.target

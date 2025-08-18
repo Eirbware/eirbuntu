@@ -20,9 +20,13 @@ dconf update
 mkdir /etc/skel/Desktop
 cp /cdrom/desktop-files/* /etc/skel/Desktop -r
 
-### Install codium
-snap install codium --classic
-
 ### Changing default plymouth theme to eirbuntu to change the boot image
 ln -sf /usr/share/plymouth/themes/eirbuntu/eirbuntu.plymouth /etc/alternatives/default.plymouth
 update-initramfs -u
+
+### Setting up the systemd service to rename the os in grub
+cp /cdrom/scripts/change-os-name.sh /opt
+cp /cdrom/scripts/change-os-name.service /etc/systemd/system
+systemctl daemon-reload
+systemctl enable change-os-name.service
+/opt/change-os-name.sh
