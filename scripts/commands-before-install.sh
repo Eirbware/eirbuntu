@@ -5,8 +5,8 @@ USER=$(id -nu $ID)
 ### This file contains the commands that are ran just before the installation
 
 ### Unpack and install preinstalled packages
-dpkg -i -R -G /cdrom/preinstalled-packages
-dpkg -i -R -G /cdrom/packages-to-install
+#dpkg -i -R -G /cdrom/preinstalled-packages
+#dpkg -i -R -G /cdrom/packages-to-install
 
 ### Adding eirbuntu theme and background
 cp /cdrom/assets/eirbuntu-theme /usr/share/plymouth/themes/eirbuntu -r
