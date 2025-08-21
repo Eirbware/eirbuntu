@@ -52,7 +52,6 @@ do
   dpkg-repack $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances $package | grep "^\w") $package
 done
 # Also for codium
-apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances codium
 dpkg-repack $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances codium | grep "^\w") codium
 cd /app
 
